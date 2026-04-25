@@ -4,11 +4,11 @@ from email.header import Header
 import smtplib
 
 # === 基本配置 ===
-QQ_EMAIL = "你的QQ邮箱@qq.com"
-QQ_SMTP_PASS = "你的授权码"
+QQ_EMAIL = "2062719734@qq.com"
+QQ_SMTP_PASS = "bmegdlneuoahchie"
 SMTP_SERVER = "smtp.qq.com"
 SMTP_PORT = 465
-RECEIVER = "你的QQ邮箱@qq.com"
+RECEIVER = "2062719734@qq.com"
 
 # --- 新闻抓取 ---
 def get_hackernews():
