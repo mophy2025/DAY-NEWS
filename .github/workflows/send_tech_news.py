@@ -24,19 +24,6 @@ def get_hackernews():
             break
     return results
 
-# --- 自动翻译（用DeepL/百度/有道/可选OpenAI，示例用百度翻译API，可换成自己喜欢的） ---
-def translate_to_cn(text):
-    # 百度通用文本翻译API文档: https://fanyi-api.baidu.com/doc/21
-    appid = '你的百度翻译appid'
-    key = '你的百度翻译密钥'
-    salt = '12345678'
-    sign = requests.utils.quote(appid + text + salt + key)
-    url = f"https://fanyi-api.baidu.com/api/trans/vip/translate?q={requests.utils.quote(text)}&from=en&to=zh&appid={appid}&salt={salt}&sign={sign}"
-    res = requests.get(url).json()
-    if 'trans_result' in res:
-        return res['trans_result'][0]['dst']
-    return "[翻译失败]"
-
 # --- 编排列表 ---
 def build_news_list(news_items):
     lines = []
@@ -59,5 +46,5 @@ def send_mail(subject, content):
 if __name__ == '__main__':
     news = get_hackernews()
     news_list_str = build_news_list(news)
-    subject = "每日科技新闻 - 中英文对照"
+    subject = "daily news"
     send_mail(subject, news_list_str)
