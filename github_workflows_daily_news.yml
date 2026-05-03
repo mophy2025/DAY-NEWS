@@ -1,0 +1,28 @@
+name: Daily Tech News Email
+
+on:
+  schedule:
+    # 每天的7:30 AM（UTC+8为北京时间，UTC为23:30，GitHub Actions时间默认是 UTC）
+    - cron: '30 23 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-news:
+    runs-on: ubuntu-latest
+    env:
+      NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+      YOUR_EMAIL: ${{ secrets.YOUR_EMAIL }}
+      SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+      SMTP_PORT: ${{ secrets.SMTP_PORT }}
+      EMAIL_USER: ${{ secrets.EMAIL_USER }}
+      EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install requests
+      - name: Run News Script
+        run: python daily_tech_news_email.py
